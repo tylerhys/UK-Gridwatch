@@ -144,7 +144,7 @@ def plot_gauge(df,variable,font_size):
     )
     st.plotly_chart(fig,use_container_width=True)
 
-def plot_guage_summary(df):
+def plot_gauge_summary(df):
     source = [col for col in numeric_columns if col not in ['timestamp', 'frequency', 'demand']]
     mean_values = df[source].mean().sort_values(ascending=False)
     sorted_source = mean_values.index.tolist()
@@ -156,12 +156,12 @@ def plot_guage_summary(df):
     row1_cols = st.columns(len(row1))
     for i, variable in enumerate(row1):
         with row1_cols[i]:
-            plot_gauge(df, variable,18)
+            plot_gauge(df, variable,15)
 
     row2_cols = st.columns(len(row2))
     for i, variable in enumerate(row2):
         with row2_cols[i]:
-            plot_gauge(df, variable,18)
+            plot_gauge(df, variable,15)
 
 # Year-on-Year Chart
 @st.cache_data
@@ -350,8 +350,23 @@ st.set_page_config(
 # Title
 st.title('UK Gridwatch Dashboard')
 
-# Data Loading
-df,numeric_columns = load_stg('gridwatch.csv')
+with st.sidebar:
+    st.markdown(
+        """
+        **Upload CSV from [Gridwatch](https://www.gridwatch.templar.co.uk/download.php) for upload**
+        """, 
+        unsafe_allow_html=True
+    )
+    upload_file = st.file_uploader("", type=["csv"])
+
+    # Data Loading
+    if upload_file:
+        df, numeric_columns = load_stg(upload_file)
+        st.success("Custom dataset uploaded successfully!")
+    else:
+        df, numeric_columns = load_stg('gridwatch.csv')
+        st.info("Using default dataset: gridwatch.csv")
+
 conn = create_db(df)
 max_timestamp,min_timestamp = get_timestamp(conn)
 
@@ -383,7 +398,7 @@ with col_sum_gauge:
     plot_gauge(df_summary, 'demand',25)
     plot_gauge(df_summary, 'frequency',25)
 
-plot_guage_summary(df_summary)
+plot_gauge_summary(df_summary)
 
 st.divider()
 st.divider()
