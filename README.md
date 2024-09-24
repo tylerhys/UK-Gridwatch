@@ -2,8 +2,8 @@
 ## Background
 [Gridwatch](https://www.gridwatch.templar.co.uk/) provides a dataset of historical UK power consumption since 2011. The data can be downloaded as a single CSV file. Note that data integrity is not guaranteed.
 The dataset consists of 23 columns:
-• Four primary columns: ID column, a record timestamp, the recorded demand and the current frequency
-• 19 columns indicating the amount contributed by each source.
+- Four primary columns: ID column, a record timestamp, the recorded demand and the current frequency
+- 19 columns indicating the amount contributed by each source.
 
 ### Challenge Problem:
 Design a dashboard which reads in the file data, cleans it as necessary and presents the data. Charts should also show a moving average overlay. As well as presenting the overall dataset, you should provide summaries of the data. The summary data should be constructed from the data presented (i.e. not pre-computed) - you might think of reading the data into an in-memory database, such as sqllite, and computing the summaries there. Summaries should include year-on-year averages, daily/weekly/yearly peak and trough demand As an additional bonus, consider adding annotations indicating “interesting” features of the dataset.
