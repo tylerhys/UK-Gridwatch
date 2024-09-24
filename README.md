@@ -23,7 +23,7 @@ All features noted in the dashboards should be computed from the data provided t
 ```
 
 ## Running the App
-There is a live version being hosted on streamlit which you may access via this [link](https://ukgridwatch.streamlit.app/). However, due to their limitations, you can only upload datasets up to 100MB. Hence if you'd like to run the entire dataset from Gridwatch, you will need to run a local version.
+There is a live version hosted on [Streamlit](https://ukgridwatch.streamlit.app/). However, due to their limitations, you can only upload datasets up to 100MB. Hence if you'd like to run the entire dataset from Gridwatch, you will need to run a local version.
 ### Prerequisites
 ```
 git clone https://github.com/yourusername/uk-gridwatch.git
